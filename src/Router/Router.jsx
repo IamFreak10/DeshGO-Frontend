@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router';
 import RootLayout from '../Layouts/RootLayout';
 import DarkMode from '../Shared/DarkMode/DarkMode';
+import Home from '../PAges/Home/Home';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -8,7 +9,7 @@ export const router = createBrowserRouter([
     children: [
         {
             index:true,
-            Component:DarkMode
+            Component:Home
 
         }
     ]

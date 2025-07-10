@@ -1,13 +1,14 @@
 import { NavLink } from 'react-router';
 import { useState } from 'react';
 import DeshGo from '../DeshGo/DeshGo';
+import DarkMode from '../DarkMode/DarkMode';
 
 const Navbar = () => {
   const [user, setUser] = useState({
     name: 'Mahfuj Freak',
     email: 'mahfuj@example.com',
     photoURL: 'https://i.pravatar.cc/150?img=3',
-    loggedIn: true,
+    loggedIn: false,
   });
 
   const links = (
@@ -133,6 +134,7 @@ const Navbar = () => {
 
         {!user.loggedIn ? (
           <div className="hidden lg:flex gap-2">
+            <DarkMode />
             <NavLink
               to="/login"
               className="btn btn-outline btn-sm dark:border-gray-300 dark:text-gray-300"
@@ -145,6 +147,7 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="dropdown dropdown-end">
+            <DarkMode />
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img
