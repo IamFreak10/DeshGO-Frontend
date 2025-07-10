@@ -2,16 +2,36 @@ import { createBrowserRouter } from 'react-router';
 import RootLayout from '../Layouts/RootLayout';
 import DarkMode from '../Shared/DarkMode/DarkMode';
 import Home from '../PAges/Home/Home';
+import AuthLayout from '../Layouts/AuthLayout';
+import Community from '../PAges/Home/Commiunity/Community';
+import Login from '../PAges/AuthPages/Login/Login';
+import Register from '../PAges/AuthPages/Register/Register';
 export const router = createBrowserRouter([
   {
     path: '/',
     Component: RootLayout,
     children: [
-        {
-            index:true,
-            Component:Home
-
-        }
-    ]
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: 'community',
+        Component: Community,
+      },
+    ],
+  },
+  {
+    path: '/',
+    Component: AuthLayout,
+    children: [
+      {
+        path: 'login',
+        Component: Login,
+      },{
+        path: 'register',
+        Component: Register,
+      }
+    ],
   },
 ]);
