@@ -8,12 +8,16 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import SocialLogin from '../../../Shared/SocialLogin/SocialLogin';
 import DarkMode from '../../../Shared/DarkMode/DarkMode';
 import UseAuth from '../../../Hooks/UseAuth';
+import useAxiosSecure from '../../../Hooks/UseAxiosSecure';
+import { useNavigate } from 'react-router';
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
   const [passwordValid, setPasswordValid] = useState(true);
-  const { createUser } = UseAuth();
+  const { createUser, logOut, updateUser } = UseAuth();
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -23,7 +27,7 @@ const Register = () => {
   } = useForm();
 
   const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=])[A-Za-z\d!@#$%^&*()_\-+=]{6,}$/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=]).{6,}$/;
 
   const handleShowPassword = () => setShowPassword(!showPassword);
 
@@ -67,11 +71,40 @@ const Register = () => {
       );
     }
 
-    createUser(data.email, data.password).then(() => {
-        
+    createUser(data.email, data.password)
+      .then(async () => {
+        // Save user info to the database,default user role is user
+        const userInfo = {
+          email: data.email,
+          displayName: data.name,
+          role: 'user',
+          created_at: new Date().toISOString(),
+          image: imageUrl,
+        };
+        const userReg = await axiosSecure.post('/users', userInfo);
 
-     
-    });
+        //Update user for display Profile Pic
+        const userprofile = {
+          displayName: data.name,
+          photoURL: imageUrl,
+        };
+        updateUser(userprofile).then(() => {
+          console.log(userReg.data);
+          if (userReg.data.insertedId) {
+            logOut();
+            reset();
+            navigate('/login');
+            Swal.fire(
+              'Success',
+              'Registration successful. Please log in.',
+              'success'
+            );
+          }
+        });
+      })
+      .catch((error) => {
+        Swal.fire('Registration Failed', error.message, 'error');
+      });
   };
 
   const handlePasswordChange = (e) => {
@@ -82,7 +115,7 @@ const Register = () => {
   return (
     <Fade triggerOnce direction="up" duration={1000}>
       <div className="hero min-h-screen px-4">
-        <div className="hero-content flex-col-reverse md:flex-row gap-8 w-full max-w-6xl">
+        <div className="hero-content flex-col-reverse md:flex-row-reverse gap-8 w-full max-w-6xl">
           {/* Lottie Animation */}
           <div className="w-full md:w-1/2">
             <DarkMode />
