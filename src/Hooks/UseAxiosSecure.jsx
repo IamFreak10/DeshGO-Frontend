@@ -4,38 +4,38 @@ import React from 'react';
 // import { useNavigate } from 'react-router';
 
 const axiosSecure = axios.create({
-  baseURL: `https://profast-server-kappa.vercel.app`,
+  baseURL: `http://localhost:5000`,
 });
 
 const useAxiosSecure = () => {
-//   const { logOut } = useAuth();
-//   const navigate = useNavigate();
-//   const { user } = useAuth();
-//   axiosSecure.interceptors.request.use(
-//     (config) => {
-//       config.headers.Authorization = `Bearer ${user.accessToken}`;
-//       return config;
-//     },
-//     (error) => {
-//       return Promise.reject(error);
-//     }
-//   );
+  //   const { logOut } = useAuth();
+  //   const navigate = useNavigate();
+  //   const { user } = useAuth();
+  //   axiosSecure.interceptors.request.use(
+  //     (config) => {
+  //       config.headers.Authorization = `Bearer ${user.accessToken}`;
+  //       return config;
+  //     },
+  //     (error) => {
+  //       return Promise.reject(error);
+  //     }
+  //   );
 
-//   axiosSecure.interceptors.response.use(
-//     (res) => {
-//       return res;
-//     },
-//     (error) => {
-//       const status = error.status;
-//       if (status === 403) {
-//         navigate('/forbidden');
-//       } else if (status === 401) {
-//         logOut().then(() => {
-//           navigate('/login');
-//         });
-//       }
-//     }
-//   );
+  //   axiosSecure.interceptors.response.use(
+  //     (res) => {
+  //       return res;
+  //     },
+  //     (error) => {
+  //       const status = error.status;
+  //       if (status === 403) {
+  //         navigate('/forbidden');
+  //       } else if (status === 401) {
+  //         logOut().then(() => {
+  //           navigate('/login');
+  //         });
+  //       }
+  //     }
+  //   );
 
   return axiosSecure;
 };

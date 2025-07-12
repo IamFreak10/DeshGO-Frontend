@@ -8,12 +8,14 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import SocialLogin from '../../../Shared/SocialLogin/SocialLogin';
 import DarkMode from '../../../Shared/DarkMode/DarkMode';
+import UseAuth from '../../../Hooks/UseAuth';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state || '/';
+  const from = location.state?.from || '/';
+  const { signIn } = UseAuth();
 
   const {
     register,
@@ -26,12 +28,16 @@ const Login = () => {
   const onSubmit = (data) => {
     const { email, password } = data;
 
-    // ✅ TODO: Firebase login logic here
-    console.log('Login with', email, password);
-
-    // ✅ TODO: navigate + alert on success
-    // Swal.fire({...})
-    // navigate(from);
+    signIn(email, password)
+      .then(() => {
+        Swal.fire('Success', 'Login Successfully', 'success');
+        navigate(from, { replace: true });
+        navigate(from);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        // Swal.fire('Error', error.message, 'error');
+      });
   };
 
   return (

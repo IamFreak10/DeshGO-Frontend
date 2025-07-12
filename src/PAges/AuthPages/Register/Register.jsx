@@ -59,7 +59,11 @@ const Register = () => {
 
   const onSubmit = (data) => {
     if (!imageUrl) {
-      return Swal.fire('Error', 'Profile image is required.', 'error');
+      return Swal.fire(
+        'Error',
+        'Profile image is required.It Might take some time.WAIT',
+        'error'
+      );
     }
 
     if (!passwordRegex.test(data.password)) {
@@ -82,6 +86,7 @@ const Register = () => {
           image: imageUrl,
         };
         const userReg = await axiosSecure.post('/users', userInfo);
+        console.log(userReg);
 
         //Update user for display Profile Pic
         const userprofile = {
@@ -89,7 +94,6 @@ const Register = () => {
           photoURL: imageUrl,
         };
         updateUser(userprofile).then(() => {
-          console.log(userReg.data);
           if (userReg.data.insertedId) {
             logOut();
             reset();
