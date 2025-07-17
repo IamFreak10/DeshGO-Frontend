@@ -1,22 +1,57 @@
-import React, { use } from 'react';
-
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import UseAuth from '../../Hooks/UseAuth';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
+import { useQueryClient } from '@tanstack/react-query';
 
 const SocialLogin = () => {
   const { signInWithGoogle } = UseAuth();
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   const location = useLocation();
   const from = location.state || '/';
-  const navigate = useNavigate();
-  const handleGoogleSignIn = () => {
-    
-    signInWithGoogle().then(() => {
-    //  Todo: navigate to desired place
-    });
+  const queryClient = useQueryClient();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithGoogle();
+      const user = result.user;
+
+      const userInfo = {
+        email: user.email,
+        displayName: user.displayName,
+        role: 'user',
+        created_at: new Date().toISOString(),
+        image: user.photoURL,
+      };
+
+      // Step 1: Check if user already exists
+      const { data: existingUser } = await axiosSecure.get(
+        `/users?email=${user.email}`
+      );
+
+      if (existingUser.length === 0) {
+        // Step 2: If not exists, insert new user
+        const res = await axiosSecure.post('/users', userInfo);
+        if (!res.data.insertedId) {
+          throw new Error('Failed to create new user.');
+        }
+      }
+
+      // Step 3: Login success
+      queryClient.invalidateQueries(['user', user.email]); // Optional cache busting
+      Swal.fire('Success', 'Login successful', 'success');
+      navigate(from);
+    } catch (error) {
+      console.error(error);
+      Swal.fire('Error', 'Google Sign-in failed', 'error');
+    }
   };
+
   return (
     <div className="text-center">
-      <div className="divider text-black ">OR</div>
+      <div className="divider text-black dark:text-white">OR</div>
       <button
         onClick={handleGoogleSignIn}
         className="btn bg-white text-black border-[#e5e5e5]"

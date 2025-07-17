@@ -15,12 +15,13 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from || '/';
-  const { signIn } = UseAuth();
+  const { signIn, resetPassword } = UseAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm();
 
   const handleShowPassword = () => setShowPassword(!showPassword);
@@ -32,12 +33,50 @@ const Login = () => {
       .then(() => {
         Swal.fire('Success', 'Login Successfully', 'success');
         navigate(from, { replace: true });
-        navigate(from);
       })
       .catch((error) => {
-        console.log(error.message);
-        // Swal.fire('Error', error.message, 'error');
+        console.error(error.message);
+        Swal.fire('Error', error.message, 'error');
       });
+  };
+
+  const handleForgotPassword = async () => {
+    const email = getValues('email');
+    if (!email) {
+      Swal.fire('Warning', 'Please enter your email to reset password.', 'warning');
+      return;
+    }
+
+    try {
+      await resetPassword(email);
+      Swal.fire({
+        icon: 'success',
+        title: 'Email Sent',
+        text: 'Redirecting to your inbox...',
+        timer: 2500,
+        showConfirmButton: false,
+      });
+
+      setTimeout(() => {
+        // Redirect based on email domain
+        if (email.includes('@gmail.com')) {
+          window.open('https://mail.google.com', '_blank');
+        } else if (email.includes('@yahoo.com')) {
+          window.open('https://mail.yahoo.com', '_blank');
+        } else if (
+          email.includes('@outlook.com') ||
+          email.includes('@hotmail.com') ||
+          email.includes('@live.com')
+        ) {
+          window.open('https://outlook.live.com', '_blank');
+        } else {
+          window.open('https://www.google.com/search?q=check+email+inbox', '_blank');
+        }
+      }, 2500);
+    } catch (error) {
+      console.error(error.message);
+      Swal.fire('Error', error.message, 'error');
+    }
   };
 
   return (
@@ -69,7 +108,7 @@ const Login = () => {
                 type="email"
                 {...register('email', { required: 'Email is required' })}
                 placeholder="Enter your email"
-                className="input input-bordered w-full mb-1 bg-amber-100 dark:bg-gray-200 text-gray-900"
+                className="input input-bordered w-full mb-1 bg-gray-100 dark:bg-gray-200 text-gray-900"
               />
               {errors.email && (
                 <p className="text-red-500 text-xs mb-3">
@@ -84,11 +123,9 @@ const Login = () => {
               <div className="relative mb-1">
                 <input
                   type={showPassword ? 'text' : 'password'}
-                  {...register('password', {
-                    required: 'Password is required',
-                  })}
+                  {...register('password', { required: 'Password is required' })}
                   placeholder="Enter your password"
-                  className="input input-bordered w-full bg-amber-100 dark:bg-gray-200 text-gray-900"
+                  className="input input-bordered w-full bg-gray-100 dark:bg-gray-200 text-gray-900"
                 />
                 <span
                   onClick={handleShowPassword}
@@ -98,12 +135,23 @@ const Login = () => {
                 </span>
               </div>
               {errors.password && (
-                <p className="text-red-500 text-xs mb-3">
+                <p className="text-red-500 text-xs mb-1">
                   {errors.password.message}
                 </p>
               )}
 
-              {/* Link to Register */}
+              {/* Forgot Password */}
+              <p className="flex text-right text-sm mb-4 text-gray-600 dark:text-gray-400">
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
+                  className="text-primary dark:text-green-400 font-semibold hover:underline"
+                >
+                  Forgot Password?
+                </button>
+              </p>
+
+              {/* Register Link */}
               <div className="text-sm mb-4">
                 <p className="text-gray-600 dark:text-gray-400">
                   Don't have an account?{' '}

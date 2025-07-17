@@ -10,12 +10,14 @@ import DarkMode from '../../../Shared/DarkMode/DarkMode';
 import UseAuth from '../../../Hooks/UseAuth';
 import useAxiosSecure from '../../../Hooks/UseAxiosSecure';
 import { useNavigate } from 'react-router';
+import useImageUpload from '../../../Hooks/useImageUpload';
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
   const [passwordValid, setPasswordValid] = useState(true);
   const { createUser, logOut, updateUser } = UseAuth();
+  const { uploadImage } = useImageUpload();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
@@ -35,25 +37,10 @@ const Register = () => {
     const file = e.target.files[0];
     if (!file) return;
 
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'tourist_register');
-    formData.append('folder', 'samples/ecommerce');
-
-    try {
-      const res = await fetch(
-        'https://api.cloudinary.com/v1_1/de0qvoegz/image/upload',
-        {
-          method: 'POST',
-          body: formData,
-        }
-      );
-      const data = await res.json();
-      console.log('Image URL:', data.secure_url);
-      setImageUrl(data.secure_url);
-    } catch (err) {
-      console.error('Upload failed:', err);
-      Swal.fire('Error', 'Image upload failed. Please try again.', 'error');
+ 
+    const url=await uploadImage(file);
+    if(url){
+      setImageUrl(url);
     }
   };
 
@@ -142,7 +129,7 @@ const Register = () => {
               <input
                 type="text"
                 {...register('name', { required: true })}
-                className="input bg-gray-600 dark:bg-gray-900 w-full"
+                className="input bg-gray-100 dark:bg-gray-600 w-full text-black dark:text-gray-200"
                 placeholder="Your Name"
               />
               {errors.name && (
@@ -154,7 +141,7 @@ const Register = () => {
               <input
                 type="email"
                 {...register('email', { required: true })}
-                className="input bg-gray-600 dark:bg-gray-900 w-full"
+                className="input bg-gray-100 dark:bg-gray-600 w-full text-black dark:text-gray-200"
                 placeholder="Your Email"
               />
               {errors.email && (
@@ -170,7 +157,7 @@ const Register = () => {
                   type={showPassword ? 'text' : 'password'}
                   {...register('password', { required: true })}
                   onChange={handlePasswordChange}
-                  className="input bg-gray-600 dark:bg-gray-900 w-full"
+                  className="input bg-gray-100 dark:bg-gray-600 w-full text-black dark:text-gray-200"
                   placeholder="Password"
                 />
                 <span
@@ -195,7 +182,7 @@ const Register = () => {
               <input
                 type="file"
                 accept="image/*"
-                className="file-input file-input-sm bg-gray-600 dark:bg-gray-900 w-full"
+                className="file-input file-input-sm bg-gray-100 dark:bg-gray-600 w-full text-black dark:text-gray-200"
                 onChange={handleImageUpload}
               />
 
