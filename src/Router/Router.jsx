@@ -9,6 +9,8 @@ import Register from '../PAges/AuthPages/Register/Register';
 import PrivateRoutes from '../Routes/PrivateRoutes';
 import DashbordLayout from '../Layouts/DashbordLayout';
 import AddPackage from '../PAges/Admin/AddPacakage';
+import JoinGuide from '../PAges/TourGuide/JoinGuide';
+import ManageCandidates from '../PAges/Admin/ManageCandidates';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -44,7 +46,14 @@ export const router = createBrowserRouter([
       {
         path:'add-package',
         Component:AddPackage,
+      },{
+        path:'join-as-tour-guide',
+        Component:JoinGuide
       },
+      {
+        path:'manage-candidates',
+        Component:ManageCandidates
+      }
     ]
   }
 ]);
