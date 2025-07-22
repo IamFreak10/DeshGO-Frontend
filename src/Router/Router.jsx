@@ -11,6 +11,7 @@ import DashbordLayout from '../Layouts/DashbordLayout';
 import AddPackage from '../PAges/Admin/AddPacakage';
 import JoinGuide from '../PAges/TourGuide/JoinGuide';
 import ManageCandidates from '../PAges/Admin/ManageCandidates';
+import PackageDetails from '../PAges/DetailsPages/PacakgeDetails/PacakgeDetails';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
         path: 'community',
         Component: Community,
       },
+      {
+        path: 'package/:id',
+        Component: PackageDetails,
+      },
     ],
   },
   {
@@ -33,27 +38,33 @@ export const router = createBrowserRouter([
       {
         path: 'login',
         Component: Login,
-      },{
+      },
+      {
         path: 'register',
         Component: Register,
-      }
+      },
     ],
   },
   {
-    path:'dashboard',
-    element:<PrivateRoutes><DashbordLayout></DashbordLayout></PrivateRoutes>,
+    path: 'dashboard',
+    element: (
+      <PrivateRoutes>
+        <DashbordLayout></DashbordLayout>
+      </PrivateRoutes>
+    ),
     children: [
       {
-        path:'add-package',
-        Component:AddPackage,
-      },{
-        path:'join-as-tour-guide',
-        Component:JoinGuide
+        path: 'add-package',
+        Component: AddPackage,
       },
       {
-        path:'manage-candidates',
-        Component:ManageCandidates
-      }
-    ]
-  }
+        path: 'join-as-tour-guide',
+        Component: JoinGuide,
+      },
+      {
+        path: 'manage-candidates',
+        Component: ManageCandidates,
+      },
+    ],
+  },
 ]);
