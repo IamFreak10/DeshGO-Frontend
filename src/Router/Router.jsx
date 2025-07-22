@@ -12,6 +12,7 @@ import AddPackage from '../PAges/Admin/AddPacakage';
 import JoinGuide from '../PAges/TourGuide/JoinGuide';
 import ManageCandidates from '../PAges/Admin/ManageCandidates';
 import PackageDetails from '../PAges/DetailsPages/PacakgeDetails/PacakgeDetails';
+import MyBooking from '../PAges/Tourist/MyBooking';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -64,7 +65,13 @@ export const router = createBrowserRouter([
       {
         path: 'manage-candidates',
         Component: ManageCandidates,
-      },
+      },{
+        path:'my-bookings',
+        Component:MyBooking
+
+      },{
+        path:'/payment/:id',
+      }
     ],
   },
 ]);

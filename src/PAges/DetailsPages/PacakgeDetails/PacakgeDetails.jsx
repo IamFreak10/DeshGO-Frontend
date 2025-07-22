@@ -63,7 +63,7 @@ export default function PackageDetails() {
       touristName: user?.displayName,
       touristEmail: user?.email,
       touristImage: user?.photoURL,
-      price: pkg.price,
+      price: Number(pkg.price),
       guideName: formData.guideName,
       bookingStatus: 'pending',
       paymentStatus: 'unpaid',
