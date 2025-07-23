@@ -81,6 +81,7 @@ const DashbordLayout = () => {
             <li>
               <NavLink
                 to="/dashboard"
+                end
                 className={({ isActive }) => navClass(isActive)}
               >
                 <FaHome />

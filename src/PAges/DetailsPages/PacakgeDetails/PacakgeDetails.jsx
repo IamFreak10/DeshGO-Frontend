@@ -45,6 +45,7 @@ export default function PackageDetails() {
       return res.data;
     },
   });
+  
 
   const onSubmit = async (formData) => {
     if (!user) {
@@ -64,12 +65,12 @@ export default function PackageDetails() {
       touristEmail: user?.email,
       touristImage: user?.photoURL,
       price: Number(pkg.price),
-      guideName: formData.guideName,
+      guideEmail: formData.guideEmail,
       bookingStatus: 'pending',
       paymentStatus: 'unpaid',
       bookedAt: new Date().toISOString(),
     };
-   
+
     try {
       const res = await axiosSecure.post('/bookings', bookingInfo);
       if (res.data.insertedId) {
@@ -109,9 +110,15 @@ export default function PackageDetails() {
   });
 
   return (
-    <Fade delay={200} duration={1000} triggerOnce direction="up">
+    <Fade
+      className="flex flex-col items-center"
+      delay={200}
+      duration={1000}
+      triggerOnce
+      direction="up"
+    >
       {/* Package Title and Images */}
-      <div className="max-w-7xl mx-auto p-4 text-center">
+      <div className="max-w-7xl  p-4 text-center">
         <h1 className="text-sm md:text-3xl font-bold text-gray-800 dark:text-white flex items-center gap-3 mb-6">
           <FaMapMarkedAlt className="text-blue-600 text-4xl drop-shadow" />
           {pkg.title}
@@ -135,7 +142,7 @@ export default function PackageDetails() {
       {/* About Section */}
       <div>
         <Fade delay={1000} cascade damping={0.1}>
-          <div className="max-w-7xl mx-auto p-4 text-center">
+          <div className="max-w-7xl  p-4 text-center">
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
               {pkg.about}
             </p>
@@ -144,7 +151,7 @@ export default function PackageDetails() {
       </div>
 
       {/* Tour Plan Section */}
-      <div className="w-full rounded-3xl join join-vertical max-w-4xl mx-auto">
+      <div className=" rounded-3xl join join-vertical ">
         {pkg.days?.map((day, index) => (
           <div
             key={index}
@@ -175,7 +182,7 @@ export default function PackageDetails() {
       </div>
 
       {/* Guides Section */}
-      <div className="max-w-7xl mx-auto p-6 mt-12 text-left">
+      <div className="max-w-7xl  p-6 mt-12 text-left">
         <h2 className="text-3xl text-center font-extrabold mb-6 text-gray-900 dark:text-gray-300 tracking-tight">
           Tour Guides
         </h2>
@@ -219,7 +226,7 @@ export default function PackageDetails() {
       </div>
 
       {/* Booking Form */}
-      <div className="max-w-90% mx-auto bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md mt-16 mb-10 border border-gray-200 dark:border-gray-700">
+      <div className="w-full max-w-7xl  bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md mt-16 mb-10 border border-gray-200 dark:border-gray-700">
         <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-6">
           Book This Tour
         </h2>
@@ -310,12 +317,12 @@ export default function PackageDetails() {
               Select Tour Guide
             </label>
             <select
-              {...register('guideName', { required: true })}
+              {...register('guideEmail', { required: true })}
               className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
             >
               <option value="">Select Tour Guide</option>
               {guides.map((guide) => (
-                <option key={guide._id} value={guide.name}>
+                <option key={guide._id} value={guide.email}>
                   {guide.name}
                 </option>
               ))}

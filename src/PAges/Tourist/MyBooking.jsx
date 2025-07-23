@@ -10,9 +10,9 @@ export default function MyBooking() {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
-  // ✅ useQuery with object form
   const {
     data: bookings = [],
+    
     isLoading,
     error,
   } = useQuery({
@@ -22,10 +22,9 @@ export default function MyBooking() {
       const res = await axiosSecure.get(`/bookings?email=${user.email}`);
       return res.data;
     },
-    enabled: !!user?.email, // don't fetch until user is ready
+    enabled: !!user?.email,
   });
-console.log(bookings);
-  // ✅ useMutation with object form
+
   const cancelMutation = useMutation({
     mutationFn: (bookingId) => axiosSecure.delete(`/bookings/${bookingId}`),
     onSuccess: () => {
@@ -59,7 +58,7 @@ console.log(bookings);
     );
 
   return (
-    <div className="max-w-90% mx-auto p-4">
+    <div className="max-w-[90%] mx-auto p-4">
       <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-200 text-center">
         My Bookings
       </h2>
@@ -78,6 +77,7 @@ console.log(bookings);
                 <th className="py-3 px-4 text-left">Tour Date</th>
                 <th className="py-3 px-4 text-left">Price</th>
                 <th className="py-3 px-4 text-left">Status</th>
+                <th className="py-3 px-4 text-left">Payment</th>
                 <th className="py-3 px-4 text-left">Actions</th>
               </tr>
             </thead>
@@ -87,7 +87,11 @@ console.log(bookings);
                   key={booking._id}
                   className="border-b border-gray-200 dark:border-gray-700"
                 >
-                  <td className="py-3 px-4">{booking.packageTitle.slice(0,55 )+'...'}</td>
+                  <td className="py-3 px-4">
+                    {booking.packageTitle.length > 55
+                      ? `${booking.packageTitle.slice(0, 55)}...`
+                      : booking.packageTitle}
+                  </td>
                   <td className="py-3 px-4">{booking.guideName}</td>
                   <td className="py-3 px-4">
                     {new Date(booking.tourDate).toLocaleDateString()}
@@ -96,11 +100,14 @@ console.log(bookings);
                   <td className="py-3 px-4 capitalize">
                     {booking.bookingStatus}
                   </td>
+                  <td className="py-3 px-4 capitalize">
+                    {booking.paymentStatus}
+                  </td>
                   <td className="py-3 px-4 space-x-2">
                     {booking.bookingStatus === 'pending' && (
                       <>
                         <Link
-                          to={`/payment/${booking._id}`}
+                          to={`/dashboard/payment/${booking._id}`}
                           className="px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded-md"
                         >
                           Pay
@@ -123,3 +130,4 @@ console.log(bookings);
     </div>
   );
 }
+

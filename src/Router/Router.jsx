@@ -13,6 +13,12 @@ import JoinGuide from '../PAges/TourGuide/JoinGuide';
 import ManageCandidates from '../PAges/Admin/ManageCandidates';
 import PackageDetails from '../PAges/DetailsPages/PacakgeDetails/PacakgeDetails';
 import MyBooking from '../PAges/Tourist/MyBooking';
+import Payment from '../PAges/Tourist/PaymentStripe/Payment';
+import PaymentWrapper from '../PAges/Tourist/PaymentStripe/PaymentWrapper';
+import Unauthorized from '../Shared/UnAuthorizedPAges/Unauthorized';
+import AdminRoutes from '../Routes/AdminRoutes';
+import MyAssignedTour from '../PAges/TourGuide/MyAssignedTour';
+import TourGuideRoute from '../Routes/TourGuideRoute';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -56,7 +62,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: 'add-package',
-        Component: AddPackage,
+        element: (
+          <AdminRoutes>
+            <AddPackage></AddPackage>
+          </AdminRoutes>
+        ),
       },
       {
         path: 'join-as-tour-guide',
@@ -64,14 +74,32 @@ export const router = createBrowserRouter([
       },
       {
         path: 'manage-candidates',
-        Component: ManageCandidates,
-      },{
-        path:'my-bookings',
-        Component:MyBooking
-
-      },{
-        path:'/payment/:id',
-      }
+        element: (
+          <AdminRoutes>
+            <ManageCandidates></ManageCandidates>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: 'my-bookings',
+        Component: MyBooking,
+      },
+      {
+        path: 'payment/:id',
+        Component: PaymentWrapper,
+      },
+      {
+        path: 'unAuthorized',
+        Component: Unauthorized,
+      },
+      {
+        path: 'my-assigned-tours',
+        element: (
+         <TourGuideRoute>
+          <MyAssignedTour></MyAssignedTour>
+         </TourGuideRoute>
+        ),
+      },
     ],
   },
 ]);
