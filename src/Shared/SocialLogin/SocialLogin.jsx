@@ -4,10 +4,12 @@ import UseAuth from '../../Hooks/UseAuth';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { useQueryClient } from '@tanstack/react-query';
+import useAxios from '../../Hooks/UseAxios';
 
 const SocialLogin = () => {
   const { signInWithGoogle } = UseAuth();
-  const axiosSecure = useAxiosSecure();
+  const axiosInstance=useAxios();
+  
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state || '/';
@@ -27,13 +29,13 @@ const SocialLogin = () => {
       };
 
       // Step 1: Check if user already exists
-      const { data: existingUser } = await axiosSecure.get(
+      const { data: existingUser } = await axiosInstance.get(
         `/users?email=${user.email}`
       );
 
       if (existingUser.length === 0) {
         // Step 2: If not exists, insert new user
-        const res = await axiosSecure.post('/users', userInfo);
+        const res = await axiosInstance.post('/users', userInfo);
         if (!res.data.insertedId) {
           throw new Error('Failed to create new user.');
         }

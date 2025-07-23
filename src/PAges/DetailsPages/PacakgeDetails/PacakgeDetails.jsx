@@ -11,9 +11,11 @@ import { FaCalendarDay, FaMapMarkedAlt } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { Fade, Zoom } from 'react-awesome-reveal';
 import UseAuth from '../../../Hooks/UseAuth';
+import useAxios from '../../../Hooks/UseAxios';
 
 export default function PackageDetails() {
   const { id } = useParams();
+  const axiosInstance=useAxios();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
@@ -33,7 +35,7 @@ export default function PackageDetails() {
   } = useQuery({
     queryKey: ['package', id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/package/${id}`);
+      const res = await axiosInstance.get(`/package/${id}`);
       return res.data;
     },
   });
@@ -41,7 +43,7 @@ export default function PackageDetails() {
   const { data: guides = [] } = useQuery({
     queryKey: ['guides'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/tourguide');
+      const res = await axiosInstance.get('/tourguide');
       return res.data;
     },
   });
@@ -98,6 +100,7 @@ export default function PackageDetails() {
 
   if (isLoading) return <p className="text-center py-10">Loading...</p>;
   if (error)
+    
     return (
       <p className="text-center py-10 text-red-500">Something went wrong.</p>
     );
@@ -337,6 +340,7 @@ export default function PackageDetails() {
           {/* Submit Button */}
           <div>
             <button
+            
               type="submit"
               className="w-full py-2 px-4 font-semibold rounded-md bg-indigo-600 hover:bg-indigo-700 text-white transition"
             >
