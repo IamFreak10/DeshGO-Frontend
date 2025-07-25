@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router';
 import 'react-tabs/style/react-tabs.css';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import useAxios from '../../../Hooks/UseAxios';
 
 const tabsData = [
   {
@@ -23,11 +24,11 @@ const tabsData = [
 ];
 
 export default function TourismTabs() {
-  const axiosSecure = useAxiosSecure();
+  const axiosInstance = useAxios();
   const { data: packages = [], isLoading: loadingPackages } = useQuery({
     queryKey: ['randomPackages'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/random/packages');
+      const res = await axiosInstance.get('/random/packages');
       return res.data;
     },
   });
@@ -35,7 +36,7 @@ export default function TourismTabs() {
   const { data: tourGuides = [], isLoading: loadingGuides } = useQuery({
     queryKey: ['randomTourGuides'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/tourguides/random');
+      const res = await axiosInstance.get('/tourguides/random');
       return res.data;
     },
   });

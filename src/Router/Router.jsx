@@ -19,6 +19,8 @@ import Unauthorized from '../Shared/UnAuthorizedPAges/Unauthorized';
 import AdminRoutes from '../Routes/AdminRoutes';
 import MyAssignedTour from '../PAges/TourGuide/MyAssignedTour';
 import TourGuideRoute from '../Routes/TourGuideRoute';
+import ShareStory from '../Shared/ShareStories/ShareStory';
+import ManageStory from '../Shared/ShareStories/ManageStory';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -70,7 +72,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'join-as-tour-guide',
-        Component: JoinGuide,
+        element: (
+          <PrivateRoutes>
+            <JoinGuide></JoinGuide>
+          </PrivateRoutes>
+        ),
       },
       {
         path: 'manage-candidates',
@@ -82,7 +88,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'my-bookings',
-        Component: MyBooking,
+        element: (
+          <PrivateRoutes>
+            <MyBooking></MyBooking>
+          </PrivateRoutes>
+        ),
       },
       {
         path: 'payment/:id',
@@ -99,7 +109,13 @@ export const router = createBrowserRouter([
           <MyAssignedTour></MyAssignedTour>
          </TourGuideRoute>
         ),
-      },
+      },{
+        path:'add-stories',
+        element:<PrivateRoutes><ShareStory></ShareStory></PrivateRoutes>
+      },{
+        path:'manage-stories',
+        element:<PrivateRoutes><ManageStory></ManageStory></PrivateRoutes>
+      }
     ],
   },
 ]);

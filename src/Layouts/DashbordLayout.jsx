@@ -27,7 +27,7 @@ import DarkMode from '../Shared/DarkMode/DarkMode';
 import useUserRole from '../Hooks/useUserRole';
 
 const DashbordLayout = () => {
-  const { role, roleLoading } = useUserRole();
+  const { role} = useUserRole();
   
 
   if (role) {
@@ -99,9 +99,7 @@ const DashbordLayout = () => {
             </li>
 
             {/*Show A reloader*/}
-            {roleLoading && (
-              <span className="loading loading-infinity loading-3xl"></span>
-            )}
+          
             {/* Tourist Links */}
             {role === 'user' && (
               <>
