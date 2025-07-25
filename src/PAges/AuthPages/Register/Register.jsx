@@ -11,6 +11,7 @@ import UseAuth from '../../../Hooks/UseAuth';
 import useAxiosSecure from '../../../Hooks/UseAxiosSecure';
 import { useNavigate } from 'react-router';
 import useImageUpload from '../../../Hooks/useImageUpload';
+import useAxios from '../../../Hooks/UseAxios';
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +19,7 @@ const Register = () => {
   const [passwordValid, setPasswordValid] = useState(true);
   const { createUser, logOut, updateUser } = UseAuth();
   const { uploadImage } = useImageUpload();
-  const axiosSecure = useAxiosSecure();
+  const axiosInstance = useAxios();
   const navigate = useNavigate();
 
   const {
@@ -72,7 +73,7 @@ const Register = () => {
           created_at: new Date().toISOString(),
           image: imageUrl,
         };
-        const userReg = await axiosSecure.post('/users', userInfo);
+        const userReg = await axiosInstance.post('/users', userInfo);
         console.log(userReg);
 
         //Update user for display Profile Pic

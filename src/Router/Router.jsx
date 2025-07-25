@@ -21,6 +21,7 @@ import MyAssignedTour from '../PAges/TourGuide/MyAssignedTour';
 import TourGuideRoute from '../Routes/TourGuideRoute';
 import ShareStory from '../Shared/ShareStories/ShareStory';
 import ManageStory from '../Shared/ShareStories/ManageStory';
+import EditStory from '../Shared/ShareStories/EditStory';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -115,6 +116,9 @@ export const router = createBrowserRouter([
       },{
         path:'manage-stories',
         element:<PrivateRoutes><ManageStory></ManageStory></PrivateRoutes>
+      },{
+        path:'edit/:id',
+        element:<PrivateRoutes><EditStory></EditStory></PrivateRoutes>
       }
     ],
   },
