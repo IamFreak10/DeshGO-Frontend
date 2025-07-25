@@ -87,10 +87,10 @@ const MyAssignedTour = () => {
                 </td>
                 <td className="px-4 py-2 flex items-center justify-center gap-2">
                   <button
-                    disabled={tour.bookingStatus !== 'in-review'}
+                    disabled={tour.bookingStatus !== 'In Review'}
                     onClick={() => handleAccept(tour._id)}
                     className={`px-4 py-1 rounded-xl text-white text-sm font-medium ${
-                      tour.bookingStatus === 'in-review'
+                      tour.bookingStatus === 'In Review'
                         ? 'bg-green-500 hover:bg-green-600'
                         : 'bg-gray-400 cursor-not-allowed'
                     }`}
@@ -99,9 +99,9 @@ const MyAssignedTour = () => {
                   </button>
                   <button
                     onClick={() => handleReject(tour._id)}
-                    disabled={tour.bookingStatus !== 'in-review'}
+                    disabled={tour.bookingStatus !== 'In Review'}
                     className={`px-4 py-1 rounded-xl text-white text-sm font-medium ${
-                      tour.bookingStatus === 'in-review'
+                      tour.bookingStatus === 'In Review'
                         ? 'bg-red-500 hover:bg-red-600'
                         : 'bg-gray-400 cursor-not-allowed'
                     }`}
