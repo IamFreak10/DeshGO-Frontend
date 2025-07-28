@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import UseAuth from './UseAuth';
 
 const axiosSecure = axios.create({
-  baseURL: 'https://y-theta-seven.vercel.app',
+  baseURL: 'http://localhost:5000',
 });
 
 const useAxiosSecure = () => {

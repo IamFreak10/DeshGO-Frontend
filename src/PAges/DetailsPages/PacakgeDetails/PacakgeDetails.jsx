@@ -15,7 +15,7 @@ import useAxios from '../../../Hooks/UseAxios';
 
 export default function PackageDetails() {
   const { id } = useParams();
-  const axiosInstance=useAxios();
+  const axiosInstance = useAxios();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
@@ -47,9 +47,9 @@ export default function PackageDetails() {
       return res.data;
     },
   });
-  
 
   const onSubmit = async (formData) => {
+    const { email, name } = JSON.parse(formData.guideEmail);
     if (!user) {
       Swal.fire({
         icon: 'error',
@@ -67,11 +67,13 @@ export default function PackageDetails() {
       touristEmail: user?.email,
       touristImage: user?.photoURL,
       price: Number(pkg.price),
-      guideEmail: formData.guideEmail,
+      guideEmail: email,
+      guideName: name,
       bookingStatus: 'pending',
       paymentStatus: 'unpaid',
       bookedAt: new Date().toISOString(),
     };
+    console.log(bookingInfo);
 
     try {
       const res = await axiosSecure.post('/bookings', bookingInfo);
@@ -100,7 +102,6 @@ export default function PackageDetails() {
 
   if (isLoading) return <p className="text-center py-10">Loading...</p>;
   if (error)
-    
     return (
       <p className="text-center py-10 text-red-500">Something went wrong.</p>
     );
@@ -325,7 +326,13 @@ export default function PackageDetails() {
             >
               <option value="">Select Tour Guide</option>
               {guides.map((guide) => (
-                <option key={guide._id} value={guide.email}>
+                <option
+                  key={guide._id}
+                  value={JSON.stringify({
+                    email: guide.email,
+                    name: guide.name,
+                  })}
+                >
                   {guide.name}
                 </option>
               ))}
@@ -340,7 +347,6 @@ export default function PackageDetails() {
           {/* Submit Button */}
           <div>
             <button
-            
               type="submit"
               className="w-full py-2 px-4 font-semibold rounded-md bg-indigo-600 hover:bg-indigo-700 text-white transition"
             >

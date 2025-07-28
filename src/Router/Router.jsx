@@ -22,6 +22,7 @@ import TourGuideRoute from '../Routes/TourGuideRoute';
 import ShareStory from '../Shared/ShareStories/ShareStory';
 import ManageStory from '../Shared/ShareStories/ManageStory';
 import EditStory from '../Shared/ShareStories/EditStory';
+import ManageUsers from '../PAges/Admin/ManageUsers';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -86,6 +87,14 @@ export const router = createBrowserRouter([
             <ManageCandidates></ManageCandidates>
           </AdminRoutes>
         ),
+      },
+      {
+        path:'manage-users',
+        element:(
+          <AdminRoutes>
+            <ManageUsers></ManageUsers>
+          </AdminRoutes>
+        )
       },
       {
         path: 'my-bookings',
