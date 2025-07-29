@@ -25,6 +25,7 @@ import EditStory from '../Shared/ShareStories/EditStory';
 import ManageUsers from '../PAges/Admin/ManageUsers';
 import ManageProfile from '../Shared/ManageProfile.jsx/ManageProfile';
 import TouristProfile from '../PAges/Tourist/TouristProfile';
+import StoryDetails from '../PAges/DetailsPages/StoryDetails/StoryDetails';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -41,7 +42,10 @@ export const router = createBrowserRouter([
       {
         path: 'package/:id',
         Component: PackageDetails,
-      },
+      },{
+        path:`story/:id`,
+        Component:StoryDetails
+      }
     ],
   },
   {

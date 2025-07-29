@@ -1,12 +1,13 @@
 import React from 'react';
 import { FacebookShareButton, FacebookIcon } from 'react-share';
 import UseAuth from '../../Hooks/UseAuth';
+import { Link } from 'react-router';
 
-const StoryCard = ({ story, navigate }) => {
+const StoryCard = ({ story}) => {
   const { _id, title, content, images, postedBy, createdAt } = story;
   const { user } = UseAuth();
 
-  const shareUrl = `${window.location.origin}/story/${_id}`;
+  const shareUrl = `https://deshgo-ff79f.web.app/story/${_id}`;
 
   return (
     <div className="bg-white shadow-md rounded-xl p-4 border hover:shadow-lg transition space-y-3">
@@ -25,25 +26,22 @@ const StoryCard = ({ story, navigate }) => {
 
       {/* Author and Time */}
       <div className="text-xs text-gray-500">
-        Posted by: <span className="font-medium">{postedBy}</span><br />
+        Posted by: <span className="font-medium">{postedBy}</span>
+        <br />
         <span>{new Date(createdAt).toLocaleString()}</span>
       </div>
 
       {/* Buttons */}
       <div className="flex justify-between items-center pt-2">
-        <button
-          onClick={() => (window.location.href = `/story/${_id}`)}
-          className="px-4 py-1.5 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition"
+        <Link
+          to={`/story/${_id}`}
+          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md"
         >
-          View
-        </button>
+          View Story
+        </Link>
 
         {user ? (
-          <FacebookShareButton
-            url={shareUrl}
-            quote={title}
-            hashtag="#travel"
-          >
+          <FacebookShareButton url={shareUrl} quote={title} >
             <FacebookIcon size={32} round />
           </FacebookShareButton>
         ) : (
