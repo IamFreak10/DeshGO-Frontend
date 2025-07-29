@@ -142,7 +142,7 @@ export const router = createBrowserRouter([
         path: 'manage-profile',
         element: (
           <PrivateRoutes>
-            <ManageProfile></ManageProfile>
+            <TouristProfile></TouristProfile>
           </PrivateRoutes>
         ),
       },
