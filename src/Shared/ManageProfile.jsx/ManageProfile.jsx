@@ -100,7 +100,7 @@ const ManageProfile = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 border border-amber-200 rounded-lg shadow">
+    <div className="max-w-4xl mx-auto bg-gray-200 dark:bg-gray-900 p-6  rounded-xl shadow-2xl">
       <div className="flex flex-col items-center text-center space-y-4">
         <img
           src={userInfo.image || ''}
