@@ -80,10 +80,11 @@ const AddPackage = () => {
         timer: 1500
       })
     }
-    // reset();
-    // setImageUrls([]);
-    // setCoverImage('');
-    // setDayPlans([]);
+    
+    reset();
+    setImageUrls([]);
+    setCoverImage('');
+    setDayPlans([]);
   };
 
   return (

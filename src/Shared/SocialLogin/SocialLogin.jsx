@@ -8,11 +8,11 @@ import useAxios from '../../Hooks/UseAxios';
 
 const SocialLogin = () => {
   const { signInWithGoogle } = UseAuth();
-  const axiosInstance=useAxios();
-  
+  const axiosInstance = useAxios();
+
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state || '/';
+  const from = location.state?.from || '/';
   const queryClient = useQueryClient();
 
   const handleGoogleSignIn = async () => {
@@ -44,7 +44,7 @@ const SocialLogin = () => {
       // Step 3: Login success
       queryClient.invalidateQueries(['user', user.email]); // Optional cache busting
       Swal.fire('Success', 'Login successful', 'success');
-      navigate(from);
+      navigate(from, { replace: true });
     } catch (error) {
       console.error(error);
       Swal.fire('Error', 'Google Sign-in failed', 'error');

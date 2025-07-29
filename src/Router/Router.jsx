@@ -26,6 +26,7 @@ import ManageUsers from '../PAges/Admin/ManageUsers';
 import ManageProfile from '../Shared/ManageProfile.jsx/ManageProfile';
 import TouristProfile from '../PAges/Tourist/TouristProfile';
 import StoryDetails from '../PAges/DetailsPages/StoryDetails/StoryDetails';
+import Trips from '../PAges/Home/Trips/Trips';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -40,8 +41,17 @@ export const router = createBrowserRouter([
         Component: Community,
       },
       {
+        path:'trips'
+        ,Component:Trips
+
+      },
+      {
         path: 'package/:id',
-        Component: PackageDetails,
+        element: (
+          <PrivateRoutes>
+            <PackageDetails></PackageDetails>
+          </PrivateRoutes>
+        )
       },{
         path:`story/:id`,
         Component:StoryDetails

@@ -8,7 +8,8 @@ import { HashLoader } from 'react-spinners';
 const PrivateRoutes = ({ children }) => {
   const { user, loading } = UseAuth();
   const location = useLocation();
-  console.log("PrivateRoutes -> user:", user, "loading:", loading);
+  console.log(location.pathname);
+ 
 
   if (loading) {
     return (
