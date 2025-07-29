@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import UseAuth from '../../Hooks/UseAuth';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
+
 import Swal from 'sweetalert2';
 import { useQueryClient } from '@tanstack/react-query';
 import useAxios from '../../Hooks/UseAxios';
@@ -30,7 +30,7 @@ const SocialLogin = () => {
 
       // Step 1: Check if user already exists
       const { data: existingUser } = await axiosInstance.get(
-        `/users?email=${user.email}`
+        `/users?search=${user.email}`
       );
 
       if (existingUser.length === 0) {

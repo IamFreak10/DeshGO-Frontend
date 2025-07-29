@@ -23,6 +23,8 @@ import ShareStory from '../Shared/ShareStories/ShareStory';
 import ManageStory from '../Shared/ShareStories/ManageStory';
 import EditStory from '../Shared/ShareStories/EditStory';
 import ManageUsers from '../PAges/Admin/ManageUsers';
+import ManageProfile from '../Shared/ManageProfile.jsx/ManageProfile';
+import TouristProfile from '../PAges/Tourist/TouristProfile';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -103,6 +105,10 @@ export const router = createBrowserRouter([
             <MyBooking></MyBooking>
           </PrivateRoutes>
         ),
+      },
+      {
+        path: 'manage-profile',
+        Component: TouristProfile,
       },
       {
         path: 'payment/:id',
