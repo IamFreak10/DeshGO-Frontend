@@ -3,6 +3,7 @@ import Banner from './Banner/Banner';
 import Overview from './OverviewSection/Overview';
 import TourismTabs from './TourismTab/TourismTabs';
 import Random$Story from './Random4stroy/Random$Story';
+import TravelTips from './Tips/TravelTips';
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
         <Overview></Overview>
         <TourismTabs></TourismTabs>
         <Random$Story></Random$Story>
+        <TravelTips></TravelTips>
       </div>
     </>
   );

@@ -18,7 +18,7 @@ const ManageStory = () => {
     queryKey: ['stories', user?.email],
     enabled: !!user?.email, // ensures query doesn't run without email
     queryFn: async () => {
-      const res = await axiosSecure.get(`/stories?email=${user.email}`);
+      const res = await axiosSecure.get(`/stories-by-email?email=${user.email}`);
       return res.data;
     },
   });

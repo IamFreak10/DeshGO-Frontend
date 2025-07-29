@@ -8,7 +8,6 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import SocialLogin from '../../../Shared/SocialLogin/SocialLogin';
 import DarkMode from '../../../Shared/DarkMode/DarkMode';
 import UseAuth from '../../../Hooks/UseAuth';
-import useAxiosSecure from '../../../Hooks/UseAxiosSecure';
 import { useNavigate } from 'react-router';
 import useImageUpload from '../../../Hooks/useImageUpload';
 import useAxios from '../../../Hooks/UseAxios';

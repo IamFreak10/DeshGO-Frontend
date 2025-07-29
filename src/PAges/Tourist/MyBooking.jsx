@@ -24,7 +24,7 @@ export default function MyBooking() {
     },
     enabled: !!user?.email,
   });
-  console.log(bookings);
+  
 
   const cancelMutation = useMutation({
     mutationFn: (bookingId) => axiosSecure.delete(`/bookings/${bookingId}`),

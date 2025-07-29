@@ -5,16 +5,18 @@ import ManageProfile from '../../Shared/ManageProfile.jsx/ManageProfile';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router';
+import useAxios from '../../Hooks/UseAxios';
 
 const TouristProfile = () => {
   const axiosSecure = useAxiosSecure();
+  const axiosInstance = useAxios();
   const { user } = UseAuth();
 
   const { data: userInfo = {} } = useQuery({
     queryKey: ['userInfo', user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users/${user.email}`);
+      const res = await axiosInstance.get(`/users/${user.email}`);
       return res.data;
     },
   });

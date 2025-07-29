@@ -48,7 +48,7 @@ const StoryDetails = () => {
       return res.data;
     },
   });
-  console.log(userInfo);
+
 
   if (isLoading)
     return (

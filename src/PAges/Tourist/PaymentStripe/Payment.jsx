@@ -15,6 +15,7 @@ const Payment = () => {
   const { id } = useParams();
   console.log(id);
   const axiosSecure = useAxiosSecure();
+  const axiosInstance = useAxiosSecure();
   const { user } = UseAuth();
 
   const navigate = useNavigate();
@@ -78,7 +79,7 @@ const Payment = () => {
     // Step 2: Create payment intent on backend
     let res;
     try {
-      res = await axiosSecure.post('/create-payment-intent', {
+      res = await axiosInstance.post('/create-payment-intent', {
         amountInCents,
         id,
       });

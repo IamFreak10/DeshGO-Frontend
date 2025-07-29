@@ -27,6 +27,9 @@ import ManageProfile from '../Shared/ManageProfile.jsx/ManageProfile';
 import TouristProfile from '../PAges/Tourist/TouristProfile';
 import StoryDetails from '../PAges/DetailsPages/StoryDetails/StoryDetails';
 import Trips from '../PAges/Home/Trips/Trips';
+import AboutUs from '../PAges/Admin/AboutUs';
+import Forbidden from '../Shared/Forbidden/Forbidden';
+import TourGuiideDetails from '../PAges/DetailsPages/TourGuideDetails/TourGuiideDetails';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -44,17 +47,32 @@ export const router = createBrowserRouter([
         path:'trips'
         ,Component:Trips
 
+      },{
+        path:'about',
+        Component:AboutUs
       },
       {
         path: 'package/:id',
-        element: (
+        Component: PackageDetails,
+      },{
+        path:'tourguide/:id',
+        element:(
           <PrivateRoutes>
-            <PackageDetails></PackageDetails>
+            <TourGuiideDetails></TourGuiideDetails>
+          </PrivateRoutes>
+        )
+      },
+      
+      {
+        path:`story/:id`,
+        element:(
+          <PrivateRoutes>
+            <StoryDetails></StoryDetails>
           </PrivateRoutes>
         )
       },{
-        path:`story/:id`,
-        Component:StoryDetails
+        path:'forbidden',
+        Component:Forbidden
       }
     ],
   },
@@ -122,7 +140,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'manage-profile',
-        Component: TouristProfile,
+        element: (
+          <PrivateRoutes>
+            <ManageProfile></ManageProfile>
+          </PrivateRoutes>
+        ),
       },
       {
         path: 'payment/:id',
