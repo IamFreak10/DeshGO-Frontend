@@ -14,6 +14,7 @@ const Home = () => {
         <TourismTabs></TourismTabs>
         <Random$Story></Random$Story>
         <TravelTips></TravelTips>
+       
       </div>
     </>
   );
