@@ -115,7 +115,7 @@ const AddPackage = () => {
           <label className="block mb-1 font-semibold text-black dark:text-gray-200">Package Name</label>
           <input
             type="text"
-            {...register('title', { required: true })}
+            {...register('name', { required: true })}
             className="input bg-gray-300 text-black dark:text-white dark:bg-gray-800 input-bordered w-full font-bold"
             placeholder="SundorBan Tour"
           />
