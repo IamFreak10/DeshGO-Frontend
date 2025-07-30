@@ -27,7 +27,7 @@ const tips = [
 
 const TravelTips = () => {
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 py-16 px-4 md:px-20">
+    <div className="relative overflow-hidden bg-gradient-to-br from-[#FFE3BB] to-white dark:from-gray-900 dark:to-gray-800 py-16 px-4 md:px-20">
       {/* Flying Airplane */}
       <motion.div
         initial={{ x: '-100%' }}

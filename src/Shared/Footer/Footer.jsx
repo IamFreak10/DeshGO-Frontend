@@ -7,7 +7,7 @@ const Footer = () => {
   const activeStyle = 'font-semibold underline text-black dark:text-white';
 
   return (
-    <footer className="bg-white dark:bg-black text-black dark:text-white shadow-inner rounded-t-3xl py-10 px-8 transition-all duration-300">
+    <footer className="bg-[#FFF7D1] dark:bg-black text-black dark:text-white shadow-inner rounded-t-3xl py-10 px-8 transition-all duration-300">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Logo & About */}
         <DeshGo />

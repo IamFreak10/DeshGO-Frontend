@@ -49,7 +49,7 @@ const Trips = () => {
       <div className="flex justify-center mt-8">
         <div className="join">
           <button
-            className="join-item btn"
+            className="join-item btn text-[#D91656] font-bold text-2xl"
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
           >
@@ -68,7 +68,7 @@ const Trips = () => {
           ))}
           {totalPages > 5 && <button className="join-item btn">...</button>}
           <button
-            className="join-item btn"
+            className="join-item btn text-[#D91656] font-bold text-2xl"
             onClick={() =>
               setCurrentPage((prev) => Math.min(prev + 1, totalPages))
             }

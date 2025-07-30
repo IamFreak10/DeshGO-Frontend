@@ -1,7 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-
 import { useNavigate } from 'react-router';
 import { ScaleLoader } from 'react-spinners';
 
@@ -9,7 +8,7 @@ import StoryCard from '../../../Shared/StoryCard/StoryCard';
 import useAxios from '../../../Hooks/UseAxios';
 
 const Random$Story = () => {
- const axiosInstance = useAxios();
+  const axiosInstance = useAxios();
   const navigate = useNavigate();
 
   const { data: stories = [], isLoading } = useQuery({
@@ -42,7 +41,7 @@ const Random$Story = () => {
       <div className="flex justify-center mt-8">
         <button
           onClick={() => navigate('/community')}
-          className="bg-emerald-600 text-white px-6 py-2 rounded hover:bg-emerald-700"
+          className="mt-3 bg-[#E84A5F] hover:bg-[#d1384f] text-white px-10 py-2 rounded shadow-2xl"
         >
           All Stories
         </button>

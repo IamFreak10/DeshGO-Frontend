@@ -10,7 +10,7 @@ const StoryCard = ({ story }) => {
   const shareUrl = `https://deshgo-ff79f.web.app/story/${_id}`;
 
   return (
-    <div className="bg-white dark:bg-gray-400 shadow-md rounded-xl p-4  hover:shadow-lg transition space-y-3">
+    <div className="bg-[#FFEECC] dark:bg-gray-400 shadow-md rounded-xl p-4  hover:shadow-lg transition space-y-3">
       {/* Story Image */}
       {images?.[0] && (
         <img
@@ -38,7 +38,7 @@ const StoryCard = ({ story }) => {
       <div className="flex  justify-between items-center pt-2">
         <Link
           to={`/story/${_id}`}
-          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md"
+         className="mt-3 bg-[#E84A5F] hover:bg-[#d1384f] text-white px-4 py-2 rounded shadow"
         >
           View Story
         </Link>

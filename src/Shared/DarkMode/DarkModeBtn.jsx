@@ -12,7 +12,7 @@ const DarkModeBtn = () => {
       title="Toggle Dark Mode"
       className="btn btn-sm btn-circle btn-ghost"
     >
-      {darkMode ? <FaMoon className="h-6 w-6 text-yellow-400" /> : <FaSun className="h-6 w-6 text-gray-700" />}
+      {darkMode ? <FaMoon className="h-6 w-6 text-yellow-400" /> : <FaSun className="h-6 w-6 text-yellow-400" />}
     </button>
   );
 };

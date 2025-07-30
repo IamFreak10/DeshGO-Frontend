@@ -84,7 +84,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md px-4 transition-colors duration-300">
+    <div className="navbar sticky top-0 z-50 bg-[#FAEED1] dark:bg-gray-900 shadow-md px-4 transition-colors duration-300">
       {/* Left - Logo */}
       <div className="navbar-start">
         <DeshGo />
@@ -102,7 +102,7 @@ const Navbar = () => {
           <label tabIndex={0} className="btn btn-ghost">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 dark:text-gray-300"
+              className="h-6 w-6 text-[#AF3E3E] dark:text-gray-300"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

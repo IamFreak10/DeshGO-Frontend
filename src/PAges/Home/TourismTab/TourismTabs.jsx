@@ -44,7 +44,7 @@ export default function TourismTabs() {
   console.log(packages);
 
   return (
-    <div className="max-w-6xl mx-auto p-6 rounded-xl shadow-md bg-amber-100 dark:bg-gray-900 transition-all duration-300">
+    <div className="max-w-6xl mx-auto p-6 rounded-xl shadow-md bg-[#F4DEB3] dark:bg-gray-900 transition-all duration-300">
       <Tabs
         defaultIndex={0}
         selectedTabClassName="!ring-2 !ring-offset-2 !ring-blue-500 dark:!ring-amber-400"
@@ -62,7 +62,7 @@ export default function TourismTabs() {
         </TabList>
 
         {/* Packages Tab Panel */}
-        <TabPanel className="rounded-lg p-6 bg-white dark:bg-gray-800">
+        <TabPanel className="rounded-lg p-6 dark:bg-gray-800">
           {loadingPackages ? (
             <p className="text-center text-gray-500">Loading packages...</p>
           ) : (
@@ -70,14 +70,14 @@ export default function TourismTabs() {
               {packages.map((pkg) => (
                 <div
                   key={pkg._id}
-                  className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md p-4"
+                  className=" dark:bg-gray-900  dark:border-gray-700 rounded-lg shadow-md p-4"
                 >
                   <img
                     src={pkg.coverImage}
                     alt={pkg.title}
                     className="h-40 w-full object-cover rounded"
                   />
-                  <div className="mt-4">
+                  <div className="mt-4 h-[180px]  border-b ">
                     <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
                       {pkg.title}
                     </h3>
@@ -87,6 +87,9 @@ export default function TourismTabs() {
                     <p className="text-sm text-gray-600 dark:text-gray-300">
                       Price: ${pkg.price}
                     </p>
+                    
+                  </div>
+                  <div className='flex justify-center'>
                     <Link to={`/package/${pkg._id}`}>
                       <button className="mt-3 bg-[#E84A5F] hover:bg-[#d1384f] text-white px-4 py-2 rounded shadow">
                         View Package
@@ -100,7 +103,7 @@ export default function TourismTabs() {
         </TabPanel>
 
         {/* Tour Guides Tab Panel */}
-        <TabPanel className="rounded-lg p-6 bg-white dark:bg-gray-800">
+        <TabPanel className="rounded-lg p-6  dark:bg-gray-800">
           {loadingGuides ? (
             <p className="text-center text-gray-500">Loading tour guides...</p>
           ) : (
@@ -108,7 +111,7 @@ export default function TourismTabs() {
               {tourGuides.map((guide) => (
                 <div
                   key={guide._id}
-                  className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md p-4"
+                  className="dark:bg-gray-900 dark:border-gray-700 rounded-lg shadow-md p-4"
                 >
                   <img
                     src={guide.photo}
@@ -125,8 +128,8 @@ export default function TourismTabs() {
                     <p className="text-sm text-gray-600 dark:text-gray-300">
                       Language: {guide.language}
                     </p>
-                    <Link to={`/guide/${guide._id}`}>
-                      <button className="mt-3 bg-[#6ad48a] hover:bg-[#52c078] text-white px-4 py-2 rounded shadow">
+                    <Link className='flex justify-center' to={`/guide/${guide._id}`}>
+                      <button className="mt-3 bg-[#E84A5F] hover:bg-[#d1384f] text-white px-4 py-2 rounded shadow">
                         View Guide
                       </button>
                     </Link>

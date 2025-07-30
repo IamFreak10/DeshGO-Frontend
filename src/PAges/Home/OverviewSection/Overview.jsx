@@ -2,7 +2,7 @@ import React from 'react';
 
 const Overview = () => {
   return (
-    <section className="bg-white dark:bg-gray-900 py-12 transition-colors duration-300">
+    <section className="bg-[#F4DEB3] dark:bg-gray-900 py-12 transition-colors duration-300 shadow-2xl rounded-3xl">
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row gap-10 items-center">
         {/* ✅ Video Embed */}
         <div className="w-full md:w-1/2 rounded-2xl aspect-video overflow-hidden">
@@ -17,7 +17,7 @@ const Overview = () => {
         </div>
 
         {/* ✅ Text Content */}
-        <div className="w-full md:w-1/2 text-center md:text-left">
+        <div className="w-full  md:w-1/2 text-center md:text-left">
           <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4 leading-snug">
             Discover the{' '}
             <span className="text-green-500">Beauty of Bangladesh</span>
@@ -31,7 +31,7 @@ const Overview = () => {
             href="https://youtu.be/YEByQP7D-S0"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary"
+            className="btn border-[#E84A5F] bg-[#E84A5F] roudned-xl "
           >
             Watch Full Video on YouTube
           </a>
