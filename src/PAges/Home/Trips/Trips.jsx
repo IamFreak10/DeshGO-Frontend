@@ -33,6 +33,7 @@ const Trips = () => {
               />
             </figure>
             <div className="card-body">
+              <h1 className="card-title">{pkg.name}</h1>
               <h2 className="card-title">{pkg.title}</h2>
               <p>{pkg.about?.slice(0, 100)}...</p>
               <div className="card-actions justify-end">

@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import 'react-datepicker/dist/react-datepicker.css';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
-import { FaCalendarDay, FaMapMarkedAlt } from 'react-icons/fa';
+import { FaCalendarDay, FaMapMarkedAlt, FaPlaneDeparture } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { Fade, Zoom } from 'react-awesome-reveal';
 import UseAuth from '../../../Hooks/UseAuth';
@@ -122,8 +122,13 @@ export default function PackageDetails() {
       direction="up"
     >
       {/* Package Title and Images */}
+      <h1 className="text-2xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+        <FaPlaneDeparture className="text-red-600" />
+        {pkg.name}
+      </h1>
+
       <div className="max-w-7xl  p-4 text-center">
-        <h1 className="text-sm md:text-3xl font-bold text-gray-800 dark:text-white flex items-center gap-3 mb-6">
+        <h1 className=" text-sm md:text-3xl font-bold text-gray-800 dark:text-white flex items-center gap-3 mb-6">
           <FaMapMarkedAlt className="text-blue-600 text-4xl drop-shadow" />
           {pkg.title}
         </h1>
