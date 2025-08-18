@@ -13,7 +13,7 @@ const ShareStory = () => {
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const { user } = UseAuth();
-  console.log(user);
+ 
 
   const [selectedFiles, setSelectedFiles] = useState([]);
 

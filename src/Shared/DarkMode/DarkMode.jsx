@@ -6,7 +6,7 @@ import DarkModeBtn from './DarkModeBtn';
 function DarkMode() {
   const [darkMode, setDarkMode] = useState(() => {
     const isDark = localStorage.getItem('darkMode');
-    return isDark === 'true';
+    return isDark !== 'false';
   });
 
   const toggleDarkMode = () => {

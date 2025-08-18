@@ -14,8 +14,8 @@ const useAxiosSecure = () => {
   useEffect(() => {
     const requestInterceptor = axiosSecure.interceptors.request.use(
       (config) => {
-        if(!user?.accessToken){
-          throw new axios.Cancel('Token is not ready yet')
+        if (!user?.accessToken) {
+          throw new axios.Cancel('Token is not ready yet');
         }
         if (user?.accessToken) {
           config.headers.Authorization = `Bearer ${user.accessToken}`;

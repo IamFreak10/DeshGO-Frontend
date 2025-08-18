@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
+import PackageCard from '../../../Shared/PacakgeCard/PackageCard';
 
 const Trips = () => {
   const [packages, setPackages] = useState([]);
@@ -24,25 +25,26 @@ const Trips = () => {
       <h2 className="text-2xl font-semibold mb-4">All Trips</h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {packages.map((pkg) => (
-          <div key={pkg._id} className="card bg-base-100 shadow-xl">
-            <figure>
-              <img
-                src={pkg.coverImage}
-                alt="cover"
-                className="h-48 w-full object-cover"
-              />
-            </figure>
-            <div className="card-body">
-              <h1 className="card-title">{pkg.name}</h1>
-              <h2 className="card-title">{pkg.title}</h2>
-              <p>{pkg.about?.slice(0, 100)}...</p>
-              <div className="card-actions justify-end">
-                <Link to={`/package/${pkg._id}`} className="btn btn-primary">
-                  View
-                </Link>
-              </div>
-            </div>
-          </div>
+          <PackageCard key={pkg._id} pkg={pkg} />
+          // <div key={pkg._id} className="card bg-base-100 shadow-xl">
+          //   <figure>
+          //     <img
+          //       src={pkg.coverImage}
+          //       alt="cover"
+          //       className="h-48 w-full object-cover"
+          //     />
+          //   </figure>
+          //   <div className="card-body">
+          //     <h1 className="card-title">{pkg.name}</h1>
+          //     <h2 className="card-title">{pkg.title}</h2>
+          //     <p>{pkg.about?.slice(0, 100)}...</p>
+          //     <div className="card-actions justify-end">
+          //       <Link to={`/package/${pkg._id}`} className="btn btn-primary">
+          //         View
+          //       </Link>
+          //     </div>
+          //   </div>
+          // </div>
         ))}
       </div>
 
@@ -60,7 +62,7 @@ const Trips = () => {
             <button
               key={num}
               className={`join-item btn ${
-                currentPage === num + 1 ? 'btn-active' : ''
+                currentPage === num + 1 ? 'btn-warning' : ''
               }`}
               onClick={() => setCurrentPage(num + 1)}
             >

@@ -3,8 +3,10 @@ import { FaSuitcaseRolling, FaUserTie } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router';
 import 'react-tabs/style/react-tabs.css';
-import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { motion } from 'framer-motion';
 import useAxios from '../../../Hooks/UseAxios';
+import PackageCard from '../../../Shared/PacakgeCard/PackageCard';
+import Tguide from '../../../Shared/TourGuideCrad/Tguide';
 
 const tabsData = [
   {
@@ -40,20 +42,18 @@ export default function TourismTabs() {
       return res.data;
     },
   });
-  console.log(tourGuides);
-  console.log(packages);
 
   return (
-    <div className="max-w-6xl mx-auto p-6 rounded-xl shadow-md bg-[#F4DEB3] dark:bg-gray-900 transition-all duration-300">
+    <div className="w-[100%] mx-auto p-6 rounded-xl shadow-md bg-[#F4DEB3] dark:bg-gray-900 transition-all duration-300">
       <Tabs
         defaultIndex={0}
-        selectedTabClassName="!ring-2 !ring-offset-2 !ring-blue-500 dark:!ring-amber-400"
+        selectedTabClassName="!ring-2 !ring-offset-2 !ring-blue-500  dark:!ring-amber-400"
       >
         <TabList className="flex flex-wrap gap-4 mb-6">
           {tabsData.map((tab, idx) => (
             <Tab
               key={idx}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer transition duration-200 hover:scale-105 font-semibold ${tab.textColor} bg-white dark:bg-gray-800`}
+              className={`flex items-center  gap-2 px-4 py-2 rounded-lg cursor-pointer transition duration-200 hover:scale-105 font-semibold ${tab.textColor} bg-white dark:bg-gray-800`}
             >
               {tab.icon}
               {tab.name}
@@ -62,41 +62,23 @@ export default function TourismTabs() {
         </TabList>
 
         {/* Packages Tab Panel */}
-        <TabPanel className="rounded-lg p-6 dark:bg-gray-800">
+        <TabPanel className="rounded-lg p-6 ">
           {loadingPackages ? (
             <p className="text-center text-gray-500">Loading packages...</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {packages.map((pkg) => (
-                <div
+              {packages.map((pkg,index) => (
+              
+                <motion.div
                   key={pkg._id}
-                  className=" dark:bg-gray-900  dark:border-gray-700 rounded-lg shadow-md p-4"
+                  initial={{ opacity: 0,x: -30, y: -30 }}
+                  whileInView={{ opacity: 1,x: 0, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  viewport={{ once: false }}
+                 
                 >
-                  <img
-                    src={pkg.coverImage}
-                    alt={pkg.title}
-                    className="h-40 w-full object-cover rounded"
-                  />
-                  <div className="mt-4 h-[180px]  border-b ">
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                      {pkg.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Type: {pkg.type}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Price: ${pkg.price}
-                    </p>
-                    
-                  </div>
-                  <div className='flex justify-center'>
-                    <Link to={`/package/${pkg._id}`}>
-                      <button className="mt-3 bg-[#E84A5F] hover:bg-[#d1384f] text-white px-4 py-2 rounded shadow">
-                        View Package
-                      </button>
-                    </Link>
-                  </div>
-                </div>
+                  <PackageCard pkg={pkg} />
+                </motion.div>
               ))}
             </div>
           )}
@@ -108,33 +90,19 @@ export default function TourismTabs() {
             <p className="text-center text-gray-500">Loading tour guides...</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {tourGuides.map((guide) => (
-                <div
+              {tourGuides.map((guide,index) => (
+                <motion.div
                   key={guide._id}
-                  className="dark:bg-gray-900 dark:border-gray-700 rounded-lg shadow-md p-4"
+                  
+                  initial={{ opacity: 0,x: -30, y: -30 }}
+                  whileInView={{ opacity: 1,x: 0, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  viewport={{ once: false }}
+                  
                 >
-                  <img
-                    src={guide.photo}
-                    alt={guide.name}
-                    className="h-40 w-full object-cover rounded"
-                  />
-                  <div className="mt-4">
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                      {guide.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Experience: {guide.experience} yrs
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Language: {guide.language}
-                    </p>
-                    <Link className='flex justify-center' to={`/guide/${guide._id}`}>
-                      <button className="mt-3 bg-[#E84A5F] hover:bg-[#d1384f] text-white px-4 py-2 rounded shadow">
-                        View Guide
-                      </button>
-                    </Link>
-                  </div>
-                </div>
+                  <Tguide guide={guide} />
+                  
+                </motion.div>
               ))}
             </div>
           )}

@@ -13,7 +13,7 @@ const Payment = () => {
   const stripe = useStripe();
   const elements = useElements();
   const { id } = useParams();
-  console.log(id);
+  
   const axiosSecure = useAxiosSecure();
   const axiosInstance = useAxiosSecure();
   const { user } = UseAuth();
@@ -73,7 +73,7 @@ const Payment = () => {
       return;
     } else {
       setError('');
-      console.log('Payment Method:', paymentMethod);
+      
     }
 
     // Step 2: Create payment intent on backend
@@ -110,7 +110,7 @@ const Payment = () => {
 
       if (result.paymentIntent.status === 'succeeded') {
         // Payment succeeded: do post-payment actions here
-        console.log('Payment succeeded:', result.paymentIntent);
+   
 
         // Example: send payment info to backend
         const paymentData = {

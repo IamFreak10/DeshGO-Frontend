@@ -10,7 +10,8 @@ const StoryCard = ({ story }) => {
   const shareUrl = `https://deshgo-ff79f.web.app/story/${_id}`;
 
   return (
-    <div className="bg-[#FFEECC] dark:bg-gray-400 shadow-md rounded-xl p-4  hover:shadow-lg transition space-y-3">
+    <div className="bg-gradient-to-b from-[#9B7EBD] to-[#C5D3E8] 
+  dark:from-[#4b504b] dark:to-[#292828] shadow-md rounded-xl p-4  hover:shadow-lg transition space-y-3">
       {/* Story Image */}
       {images?.[0] && (
         <img
@@ -23,11 +24,11 @@ const StoryCard = ({ story }) => {
       {/* Title and Content */}
       <div className='space-y-2 border-b pb-2 w-full h-[120px]'>
         <div>
-        <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
-        <p className="text-sm text-gray-600 line-clamp-3">{content}</p>
+        <h2 className="text-xl font-bold text-[#085720] dark:text-[#6ad48a]">{title}</h2>
+        <p className="text-sm text-gray-500 dark:text-gray-200 line-clamp-3">{content}</p>
       </div>
       {/* Author and Time */}
-      <div className="text-xs text-gray-500">
+      <div className="text-xs text-gray-500 dark:text-gray-200">
         Posted by: <span className="font-medium">{postedBy}</span>
         <br />
         <span>{new Date(createdAt).toLocaleString()}</span>

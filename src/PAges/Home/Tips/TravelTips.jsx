@@ -63,7 +63,7 @@ const TravelTips = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.2 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className="bg-white dark:bg-gray-900 shadow-md rounded-2xl p-6 hover:shadow-lg transition duration-300"
           >
             <div className="mb-4">{tip.icon}</div>

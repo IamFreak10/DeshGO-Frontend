@@ -84,7 +84,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar sticky top-0 z-50 bg-[#FAEED1] dark:bg-gray-900 shadow-md px-4 transition-colors duration-300">
+    <div className="max-w-[100%] px-[6%]  navbar sticky top-0 z-50 bg-[#FAEED1] dark:bg-gray-900 shadow-md  transition-colors duration-300">
       {/* Left - Logo */}
       <div className="navbar-start">
         <DeshGo />
@@ -125,7 +125,7 @@ const Navbar = () => {
                 <li>
                   <NavLink
                     to="/login"
-                    className="text-lg dark:text-gray-200 hover:text-green-500"
+                    className="text-lg text-black dark:text-gray-200 hover:text-green-500"
                   >
                     Login
                   </NavLink>
@@ -133,7 +133,7 @@ const Navbar = () => {
                 <li>
                   <NavLink
                     to="/register"
-                    className="text-lg dark:text-gray-200 hover:text-green-500"
+                    className="text-lg text-black dark:text-gray-200 hover:text-green-500"
                   >
                     Register
                   </NavLink>
@@ -204,7 +204,7 @@ const Navbar = () => {
           <div className="hidden lg:flex gap-2">
             <NavLink
               to="/login"
-              className="btn btn-outline btn-sm dark:border-gray-300 dark:text-gray-300"
+              className="btn btn-sm btn-warning dark:btn-outline text-black  dark:border-gray-300 dark:text-gray-300"
             >
               Login
             </NavLink>

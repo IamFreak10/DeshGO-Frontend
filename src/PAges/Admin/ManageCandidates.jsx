@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-import Swal from "sweetalert2";
-import { format } from "date-fns";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import Swal from 'sweetalert2';
+import { format } from 'date-fns';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const ManageCandidates = () => {
   const axiosSecure = useAxiosSecure();
@@ -11,10 +11,14 @@ const ManageCandidates = () => {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
 
   // Fetch all candidates with pending status
-  const { data: candidates = [], isLoading,refetch } = useQuery({
-    queryKey: ["candidates"],
+  const {
+    data: candidates = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['candidates'],
     queryFn: async () => {
-      const res = await axiosSecure.get("/tourguide/status");
+      const res = await axiosSecure.get('/tourguide/status');
       return res.data;
     },
   });
@@ -22,17 +26,23 @@ const ManageCandidates = () => {
   // Accept candidate (update role + delete application)
   const acceptMutation = useMutation({
     mutationFn: async (candidate) => {
-      await axiosSecure.patch(`/users/${candidate.email}`, {
-        role: "tourguide",
-      });
       await axiosSecure.patch(`/tourguide/${candidate.email}`, {
-        status: "active",
+        status: 'active',
       });
-     
+
+      try {
+        await axiosSecure.patch(`/tourguide-manage/${candidate.email}`, {
+          role: 'tourguide',
+        });
+      } catch (err) {
+        console.warn('Warning: Role update failed', err);
+        // Optional: still continue without failing the whole flow
+      }
     },
+
     onSuccess: () => {
-      queryClient.invalidateQueries(["candidates"]);
-      Swal.fire("Accepted!", "Candidate has been accepted.", "success");
+      queryClient.invalidateQueries(['candidates']);
+      Swal.fire('Accepted!', 'Candidate has been accepted.', 'success');
       refetch();
     },
   });
@@ -43,18 +53,18 @@ const ManageCandidates = () => {
       await axiosSecure.delete(`/tourguide/${id}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["candidates"]);
-      Swal.fire("Rejected", "Candidate has been removed.", "info");
+      queryClient.invalidateQueries(['candidates']);
+      Swal.fire('Rejected', 'Candidate has been removed.', 'info');
       refetch();
     },
   });
 
   const handleAccept = (candidate) => {
     Swal.fire({
-      title: "Accept Candidate?",
-      icon: "question",
+      title: 'Accept Candidate?',
+      icon: 'question',
       showCancelButton: true,
-      confirmButtonText: "Yes, Accept",
+      confirmButtonText: 'Yes, Accept',
     }).then((result) => {
       if (result.isConfirmed) {
         acceptMutation.mutate(candidate);
@@ -64,10 +74,10 @@ const ManageCandidates = () => {
 
   const handleReject = (id) => {
     Swal.fire({
-      title: "Reject Candidate?",
-      icon: "warning",
+      title: 'Reject Candidate?',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: "Yes, Reject",
+      confirmButtonText: 'Yes, Reject',
     }).then((result) => {
       if (result.isConfirmed) {
         rejectMutation.mutate(id);
@@ -84,7 +94,9 @@ const ManageCandidates = () => {
       {isLoading ? (
         <p className="text-gray-600 dark:text-gray-300">Loading...</p>
       ) : candidates.length === 0 ? (
-        <p className="text-gray-600 dark:text-gray-300">No applications found.</p>
+        <p className="text-gray-600 dark:text-gray-300">
+          No applications found.
+        </p>
       ) : (
         <div className="overflow-x-auto">
           <table className="table w-full text-sm">
@@ -102,7 +114,10 @@ const ManageCandidates = () => {
             </thead>
             <tbody>
               {candidates.map((c, index) => (
-                <tr key={c._id} className="hover:bg-gray-100 dark:hover:bg-gray-800">
+                <tr
+                  key={c._id}
+                  className="hover:bg-gray-100 dark:hover:bg-gray-800"
+                >
                   <td>{index + 1}</td>
                   <td>
                     <img
@@ -115,7 +130,7 @@ const ManageCandidates = () => {
                   <td>{c.email}</td>
                   <td className="text-blue-500">User</td>
                   <td className="text-yellow-600 font-semibold">{c.status}</td>
-                  <td>{format(new Date(c.submittedAt), "PPP")}</td>
+                  <td>{format(new Date(c.submittedAt), 'PPP')}</td>
                   <td className="flex gap-2 flex-wrap">
                     <button
                       className="btn btn-xs bg-blue-500 text-white hover:bg-blue-600"
@@ -171,11 +186,11 @@ const ManageCandidates = () => {
                 <strong>Reason:</strong> {selectedCandidate.reason}
               </p>
               <p>
-                <strong>Submitted:</strong>{" "}
-                {format(new Date(selectedCandidate.submittedAt), "PPPp")}
+                <strong>Submitted:</strong>{' '}
+                {format(new Date(selectedCandidate.submittedAt), 'PPPp')}
               </p>
               <p>
-                <strong>CV:</strong>{" "}
+                <strong>CV:</strong>{' '}
                 <a
                   href={selectedCandidate.cvLink}
                   target="_blank"

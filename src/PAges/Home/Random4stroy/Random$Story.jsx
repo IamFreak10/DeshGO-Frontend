@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router';
 import { ScaleLoader } from 'react-spinners';
 
@@ -18,13 +18,10 @@ const Random$Story = () => {
       return res.data;
     },
   });
-  console.log(stories);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
-      <h1 className="text-3xl text-black dark:text-white font-bold text-center mb-6">
-        Community Spotlight ✨
-      </h1>
+    <div className="w-full md:w-[1688px]  mx-auto px-4 py-10">
+ 
 
       {isLoading ? (
         <div className="flex justify-center my-10">
@@ -32,9 +29,29 @@ const Random$Story = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stories.map((story) => (
-            <StoryCard key={story._id} story={story} />
-          ))}
+          {stories.map((story, index) =>
+            index % 2 == 0 ? (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: -30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: false }}
+              >
+                <StoryCard key={index} story={story} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key={index}
+                initial={{ opacity: -1, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: false }}
+              >
+                <StoryCard key={index} story={story} />
+              </motion.div>
+            )
+          )}
         </div>
       )}
 

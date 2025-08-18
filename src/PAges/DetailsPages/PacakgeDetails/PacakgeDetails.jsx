@@ -12,6 +12,7 @@ import { motion } from 'framer-motion';
 import { Fade, Zoom } from 'react-awesome-reveal';
 import UseAuth from '../../../Hooks/UseAuth';
 import useAxios from '../../../Hooks/UseAxios';
+import Tguide from '../../../Shared/TourGuideCrad/Tguide';
 
 export default function PackageDetails() {
   const { id } = useParams();
@@ -73,7 +74,7 @@ export default function PackageDetails() {
       paymentStatus: 'unpaid',
       bookedAt: new Date().toISOString(),
     };
-    console.log(bookingInfo);
+   
 
     try {
       const res = await axiosSecure.post('/bookings', bookingInfo);
@@ -204,30 +205,31 @@ export default function PackageDetails() {
               </p>
             ) : (
               guides.map((guide) => (
-                <Zoom
-                  key={guide._id}
-                  triggerOnce
-                  delay={180}
-                  duration={500}
-                  className="cursor-pointer"
-                >
-                  <div className="flex flex-col items-center space-y-2 rounded-lg shadow-md bg-white dark:bg-gray-900 p-4 hover:shadow-lg transition-shadow duration-300">
-                    <img
-                      src={guide.photo || '/default-profile.png'}
-                      alt={guide.name}
-                      className="w-20 h-20 rounded-full object-cover border-2 border-indigo-500"
-                    />
-                    <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center truncate w-full">
-                      {guide.name}
-                    </h3>
-                    <Link
-                      to={`/tourguide/${guide._id}`}
-                      className="mt-1 text-xs px-3 py-1.5 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-colors duration-200"
-                    >
-                      View Profile
-                    </Link>
-                  </div>
-                </Zoom>
+                <Tguide key={guide._id} guide={guide} />
+                // <Zoom
+                //   key={guide._id}
+                //   triggerOnce
+                //   delay={180}
+                //   duration={500}
+                //   className="cursor-pointer"
+                // >
+                //   <div className="flex flex-col items-center space-y-2 rounded-lg shadow-md bg-white dark:bg-gray-900 p-4 hover:shadow-lg transition-shadow duration-300">
+                //     <img
+                //       src={guide.photo || '/default-profile.png'}
+                //       alt={guide.name}
+                //       className="w-20 h-20 rounded-full object-cover border-2 border-indigo-500"
+                //     />
+                //     <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center truncate w-full">
+                //       {guide.name}
+                //     </h3>
+                //     <Link
+                //       to={`/tourguide/${guide._id}`}
+                //       className="mt-1 text-xs px-3 py-1.5 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-colors duration-200"
+                //     >
+                //       View Profile
+                //     </Link>
+                //   </div>
+                // </Zoom>
               ))
             )}
           </div>

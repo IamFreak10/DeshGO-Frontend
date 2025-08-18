@@ -73,7 +73,7 @@ const Register = () => {
           image: imageUrl,
         };
         const userReg = await axiosInstance.post('/users', userInfo);
-        console.log(userReg);
+       
 
         //Update user for display Profile Pic
         const userprofile = {

@@ -85,7 +85,15 @@ const ManageProfile = () => {
         };
       // First update Firebase Auth
       await updateUser(userprofile).then(() => {
-        console.log('User profile updated successfully');
+        Swal.fire({
+          icon: 'success',
+          title: 'Profile Updated!',
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          showConfirmButton: false,
+        })
+       
       })
       // Then update your database
       patchMutation.mutate(updatedData);
