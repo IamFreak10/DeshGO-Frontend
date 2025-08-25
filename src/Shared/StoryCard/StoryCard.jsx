@@ -10,7 +10,7 @@ const StoryCard = ({ story }) => {
   const shareUrl = `https://deshgo-ff79f.web.app/story/${_id}`;
 
   return (
-    <div className="bg-gradient-to-b from-[#9B7EBD] to-[#C5D3E8] 
+    <div className="min-w-[350px] bg-gradient-to-b from-[#9B7EBD] to-[#C5D3E8] 
   dark:from-[#4b504b] dark:to-[#292828] shadow-md rounded-xl p-4  hover:shadow-lg transition space-y-3">
       {/* Story Image */}
       {images?.[0] && (

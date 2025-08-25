@@ -4,6 +4,7 @@ import Overview from './OverviewSection/Overview';
 import TourismTabs from './TourismTab/TourismTabs';
 import Random$Story from './Random4stroy/Random$Story';
 import TravelTips from './Tips/TravelTips';
+import Newsletter from './Newsletter/Newsletter';
 
 const Home = () => {
   return (
@@ -14,6 +15,8 @@ const Home = () => {
         <TourismTabs></TourismTabs>
         <Random$Story></Random$Story>
         <TravelTips></TravelTips>
+        <Newsletter></Newsletter>
+
        
       </div>
     </>

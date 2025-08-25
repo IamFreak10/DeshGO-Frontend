@@ -25,6 +25,7 @@ import {
 import DeshGo from '../Shared/DeshGo/DeshGo';
 import DarkMode from '../Shared/DarkMode/DarkMode';
 import useUserRole from '../Hooks/useUserRole';
+import TouristProfile from '../PAges/Tourist/TouristProfile';
 
 const DashbordLayout = () => {
   const { role} = useUserRole();
@@ -67,6 +68,7 @@ const DashbordLayout = () => {
           </div>
 
           <div className="p-4 bg-white dark:bg-gray-800 dark:text-white min-h-screen">
+          
             <Outlet />
           </div>
         </div>
@@ -88,15 +90,7 @@ const DashbordLayout = () => {
                 <span>Dashboard Home</span>
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/dashboard/manage-profile"
-                className={({ isActive }) => navClass(isActive)}
-              >
-                <FaUserCog />
-                <span>Manage Profile</span>
-              </NavLink>
-            </li>
+           
 
             {/*Show A reloader*/}
           

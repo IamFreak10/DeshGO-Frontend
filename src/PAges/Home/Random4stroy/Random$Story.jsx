@@ -20,7 +20,7 @@ const Random$Story = () => {
   });
 
   return (
-    <div className="w-full md:w-[1688px]  mx-auto px-4 py-10">
+    <div className="flex flex-col justify-center items-center w-full md:w-[1690px]      ">
  
 
       {isLoading ? (
@@ -28,7 +28,7 @@ const Random$Story = () => {
           <ScaleLoader color="#2563eb" height={30} />
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-20 ">
           {stories.map((story, index) =>
             index % 2 == 0 ? (
               <motion.div

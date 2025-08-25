@@ -139,7 +139,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'manage-profile',
+        index: true,
         // accidental naming donyt mind
         element: (
           <PrivateRoutes>
